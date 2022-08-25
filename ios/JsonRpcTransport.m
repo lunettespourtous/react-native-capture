@@ -1,5 +1,5 @@
 #import "JsonRpcTransport.h"
-#import "SKTCapture.h"
+#import <CaptureSDK/CaptureSDK.h>
 
 @interface JsonRpcTransport () <SKTCaptureDelegate> {
     SKTCapture* _capture;
@@ -127,7 +127,7 @@ RCT_EXPORT_METHOD(sendTransport:(nonnull NSNumber*)handle jsonRpc:(NSString*)jso
                 block(response);
             }
         }];
-        
+
     }
     else if ([method  isEqual: @"opendevice"]){
         params = [jsonRpc objectForKey:@"params"];
@@ -244,7 +244,7 @@ RCT_EXPORT_METHOD(sendTransport:(nonnull NSNumber*)handle jsonRpc:(NSString*)jso
                 block(response);
             }
         }];
-        
+
     }
     else if ([method  isEqual: @"setproperty"]){
         params = [jsonRpc objectForKey:@"params"];
@@ -286,12 +286,12 @@ RCT_EXPORT_METHOD(sendTransport:(nonnull NSNumber*)handle jsonRpc:(NSString*)jso
                 block(response);
             }
         }];
-        
+
     }
     else if ([method  isEqual: @"waitforevent"]){
     }
     else if ([method  isEqual: @"waitforcaptureobject"]){
-        
+
     }
     else {
         NSException* exception = [NSException
@@ -457,7 +457,7 @@ RCT_EXPORT_METHOD(sendTransport:(nonnull NSNumber*)handle jsonRpc:(NSString*)jso
 +(NSString*)ConvertToJsonRpcEventFromEvent:(SKTCaptureEvent*)event fromCapture:(SKTCapture*)capture {
     NSMutableString* json = [NSMutableString stringWithFormat:@"{\"handle\": %d, \"event\":{ \"id\": %ld, \"type\": %ld",(int)capture, (long)event.ID, (long)event.Data.Type];
     switch(event.Data.Type){
-            
+
         case SKTCaptureEventDataTypeNone:
             [json appendString:@"}}"];
             break;
